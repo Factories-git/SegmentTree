@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 
-n,m,k = map(int, input().split())
+n, m, k = map(int, input().split())
 treeheight = 0
 length = n
 
@@ -17,18 +17,22 @@ tree = [0] * (treeSize + 1)
 for i in range(leftNodeStartIndex + 1, leftNodeStartIndex + n + 1):
     tree[i] = int(input())
 
+
 def setTree(i):
     while i != 1:
         tree[i // 2] += tree[i]
         i -= 1
 
+
 setTree(treeSize - 1)
+
 
 def changeVal(index, value):
     diff = value - tree[index]
     while index > 0:
         tree[index] = tree[index] + diff
         index = index // 2
+
 
 def getSum(s, e):
     partSum = 0
@@ -41,12 +45,13 @@ def getSum(s, e):
             e -= 1
         s = s // 2
         e = e // 2
-    return  partSum
+    return partSum
 
-for _ in range(m+k):
+
+for _ in range(m + k):
     question, s, e = map(int, input().split())
     if question == 1:
-        changeVal(leftNodeStartIndex + s , e)
+        changeVal(leftNodeStartIndex + s, e)
     elif question == 2:
         s = s + leftNodeStartIndex
         e = e + leftNodeStartIndex
